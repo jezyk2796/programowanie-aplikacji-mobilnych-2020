@@ -1,12 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 export default function App() {
+  const [todos, setTodos] = useState([
+    {text: 'zrobić herbatę', key: '1'},
+    {text: 'zrobić zadanie', key: '2'},
+    {text: 'wysłać zadanie', key: '3'}
+  ]);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {/* header */}
+      <View style={styles.content}>
+        {/* todo form */}
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => ( // destrukturyzacja tablicy po której iterujemy
+                <Text>{item.text}</Text>
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -14,8 +29,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
